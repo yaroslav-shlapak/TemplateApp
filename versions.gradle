@@ -22,7 +22,7 @@ project.ext {
     hockeySdkVersion = "5.1.0"
     picassoVersion = "2.71828"
     fastscrollVersion = "1.0.18"
-    crashlyticsVersion = "2.9.5"
+    crashlyticsVersion = "2.9.8"
     stethoVersion = "1.5.0"
     evernoteStateVersion = "1.4.1"
     kueryVersion = "0.5.3"
