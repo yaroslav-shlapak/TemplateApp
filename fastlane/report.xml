@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: update_fastlane" time="0.072572455">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000502693">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: Switch to android gradleClean lane" time="0.000624348">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: gradle" time="8.963810487">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: gradle" time="53.888263703">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>

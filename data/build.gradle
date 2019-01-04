@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compileSdkVersionNumber
+
+    defaultConfig {
+        minSdkVersion minSdkVersionNumber
+        targetSdkVersion compileSdkVersionNumber
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
+}
+
+dependencies {
+    // Module dependencies
+    implementation project(path: ':domain')
+
+    // Tests
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    // Room Database
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "androidx.room:room-testing:$roomVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0"
+
+    // Timber for logging
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+    // RxRelay
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion"
+
+}

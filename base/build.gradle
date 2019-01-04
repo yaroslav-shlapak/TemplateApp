@@ -1,0 +1,236 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
+apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'com.github.triplet.play'
+apply plugin: 'eu.davidea.grabver'
+
+apply from: "$rootDir/keystore.gradle"
+
+// junit5 doesn't support android projects out of the box
+apply plugin: "de.mannodermaus.android-junit5"
+
+androidExtensions {
+    experimental = true
+}
+
+versioning {
+    major = 1
+    minor = 0
+    saveOn = "publishReleaseBundle" //task which trigger base/version.properties update
+}
+
+android {
+    compileSdkVersion compileSdkVersionNumber
+    buildToolsVersion buildToolsVersionNumber
+
+    defaultConfig {
+        applicationId "com.company.app"
+        minSdkVersion minSdkVersionNumber
+        targetSdkVersion compileSdkVersionNumber
+        versionCode versioning.code
+        versionName versioning.fullVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(storeFilePath)
+            storePassword storePasswordName
+            keyAlias keyAliasName
+            keyPassword keyPasswordName
+        }
+
+        debug {
+            storeFile file(storeFilePath)
+            storePassword storePasswordName
+            keyAlias keyAliasName
+            keyPassword keyPasswordName
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            manifestPlaceholders.crashlyticsEnabled = true
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
+            manifestPlaceholders.crashlyticsEnabled = false
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+play {
+    serviceAccountCredentials = file(serviceAccountKeyPath)
+    track = "${track}"
+}
+
+dependencies {
+    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.core:core-ktx:1.0.1'
+
+    // Modules dependencies
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
+    // Support lib
+    implementation "androidx.appcompat:appcompat:$supportVersion"
+    implementation "com.google.android.material:material:$androidXCoreVersion"
+    implementation "androidx.preference:preference:$androidXCoreVersion"
+
+    // Constrain layout
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+
+    // Room Database
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-messaging:$firebaseMessagingVesrion"
+    implementation "com.google.firebase:firebase-core:$firebaseCoreVesrion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    // Timber for logging
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Dagger core
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+
+    // Dagger Android
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+
+    // ReactiveX
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    // FastRecyclerScroller
+    implementation "com.simplecityapps:recyclerview-fastscroll:$fastscrollVersion"
+
+    // KeyboardVisibilityEvent
+    implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$keyboardvisibilityeventVersion"
+
+    // Crashlytics
+    implementation("com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion@aar") {
+        transitive = true
+    }
+
+    // leakcanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanaryVersion"
+
+    // Stetho for for advanced debugging
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+    // Evernote state for saving state
+    implementation "com.evernote:android-state:$evernoteStateVersion"
+    kapt "com.evernote:android-state-processor:$evernoteStateVersion"
+
+    // Flexible adapter for better recycler view UI/UX
+    implementation "eu.davidea:flexible-adapter:$flexibleAdapterVersion"
+    implementation "eu.davidea:flexible-adapter-ui:$flexibleAdapterUiVersion"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui:$navigationVersion"
+
+    // FragNav for better fragment handling
+    implementation "com.ncapdevi:frag-nav:$fragNavVersion"
+
+    // Bottom navigation for enhanced bottom nav
+    implementation "com.aurelhubert:ahbottomnavigation:$ahBottomNavVersion"
+
+    // PhotoView for zooming, by various touch gestures
+    implementation "com.github.chrisbanes:PhotoView:$photoViewVersion"
+
+    // TopSnack bar
+    implementation "com.androidadvance:topsnackbar:$topSnackBarVersion"
+
+    // ExpandableLayout
+    implementation "net.cachapa.expandablelayout:expandablelayout:$expandableLayoutVersion"
+
+    // ProgressFab
+    implementation "com.dmitrymalkovich.android:progress-fab:$progressFabVersion"
+
+    // required for AuthWebViewClient
+    implementation "org.apache.commons:commons-text:$commonsTextVersion"
+
+    // RxRelay
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion"
+
+    // Kotlin coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
+
+    // RxBinding
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+
+
+    // Test spek2
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:$spekVersion"
+    testImplementation "org.spekframework.spek2:spek-runner-junit5:$spekVersion"
+
+    // Test kotlin
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+
+    // Test android
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+
+    // Test junit
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation"de.mannodermaus.junit5:android-instrumentation-test-runner:$junit5RunnerVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+
+    // test assertion libtestRuntimeOnly
+    testImplementation "io.kotlintest:kotlintest-runner-junit5:$kotlinTestVersion"
+    testImplementation "io.mockk:mockk:$mockkVersion"
+
+}

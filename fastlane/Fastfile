@@ -1,0 +1,72 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Run some custom sequence of lanes, supposed to be long and performed on CI server"
+  lane :custom do
+    gradle(task: "test")
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Runs all unit tests"
+  lane :unitTest do
+    gradle(task: "jacocoTestReportDebug",  flags: "--stacktrace --scan")
+  end
+
+  desc "Runs all integration tests"
+  lane :integrationTest do
+    gradle(task: "test")
+  end
+
+  desc "Gradle clean"
+  lane :gradleClean do
+    gradle(task: "clean")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy release bundle to the Google Play internal track"
+  lane :publishInternal do
+    gradleClean
+    gradle(task: "grabverRelease publishReleaseBundle -Dorg.gradle.project.track=intenal")
+  end
+
+  desc "Deploy release bundle to the Google Play beta track"
+  lane :publishBeta do
+    gradleClean
+    gradle(task: "grabverRelease publishReleaseBundle -Dorg.gradle.project.track=beta")
+  end
+
+  desc "Build release bundle"
+  lane :buildRelease do
+    gradleClean
+    gradle(task: "grabverRelease bundleRelease")
+  end
+
+end

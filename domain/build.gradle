@@ -1,0 +1,150 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "de.mannodermaus.android-junit5"
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+def fileFilter = [
+        '**/R.class',
+        '**/R$*.class',
+        '**/BuildConfig.*',
+        '**/Manifest*.*',
+        '**/*Test*.*',
+        '**/model/**',
+        '**/repository/**',
+        '**/exceptions/**'
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+
+    def debugTreeKotlin = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def debugTreeJava = fileTree(dir: "$project.buildDir/tmp/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTreeKotlin, debugTreeJava])
+    executionData = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
+    ])
+}
+
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion compileSdkVersionNumber
+
+    defaultConfig {
+        minSdkVersion minSdkVersionNumber
+        targetSdkVersion compileSdkVersionNumber
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets.each {
+        it.java.srcDirs += "src/$it.name/kotlin"
+    }
+
+    testOptions {
+        junitPlatform {
+            filters {
+                engines {
+                    include 'spek2'
+                }
+            }
+            jacocoOptions {
+                html.enabled = true
+                xml.enabled = true
+                csv.enabled = false
+                unitTests.all {
+                    testLogging.events = ["passed", "skipped", "failed"]
+                }
+                excludedClasses += fileFilter
+            }
+        }
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    // Room Database
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "androidx.room:room-testing:$roomVersion"
+    implementation "android.arch.paging:rxjava2:$pagingRxVersion"
+
+    // Retrofit gson converter
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // Timber for logging
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Java Concurrency in Practice annotations
+    implementation "net.jcip:jcip-annotations:$jcipAnnotationsVersion"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+    // RxRelay
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion"
+
+    // Test spek2
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:$spekVersion"
+    testImplementation "org.spekframework.spek2:spek-runner-junit5:$spekVersion"
+
+    // Test kotlin
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+
+    // Test android
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+
+    // Test junit
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation"de.mannodermaus.junit5:android-instrumentation-test-runner:$junit5RunnerVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+
+    // test assertion libtestRuntimeOnly
+    testImplementation "io.kotlintest:kotlintest-runner-junit5:$kotlinTestVersion"
+    testImplementation "io.mockk:mockk:$mockkVersion"
+}

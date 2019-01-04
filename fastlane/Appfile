@@ -1,0 +1,2 @@
+json_key_file("/home/yaroslav/sources/work/mi-mobile-android-v2/service-accounts/api-5432412240591964493-63315-524a8700c295.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("") # e.g. com.krausefx.app
