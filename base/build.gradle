@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'eu.davidea.grabver'
@@ -78,12 +77,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            manifestPlaceholders.crashlyticsEnabled = true
         }
         debug {
             debuggable true
             signingConfig signingConfigs.debug
-            manifestPlaceholders.crashlyticsEnabled = false
         }
     }
 
@@ -149,6 +146,12 @@ dependencies {
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui:$navigationVersion"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
     // FastRecyclerScroller
     implementation "com.simplecityapps:recyclerview-fastscroll:$fastscrollVersion"

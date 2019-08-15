@@ -13,14 +13,8 @@
             android:theme="@style/AppTheme"
             android:name="com.company.app.core.App"
             android:windowSoftInputMode="adjustResize|adjustPan|stateAlwaysHidden">
-        <meta-data
-                android:name="io.fabric.ApiKey"
-                android:value="476eef488ce6d65eda22ba1e8a485183dbb81e32"
-        />
         <activity
-                android:name="com.company.app.presentation.MainActivity"
-                android:configChanges="orientation|screenSize"
-                android:screenOrientation="portrait">
+                android:name="com.company.app.presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

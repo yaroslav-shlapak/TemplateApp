@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themeColorPrimary" format="reference|color"/>
+    <attr name="themeColorPrimaryDark" format="reference|color"/>
+    <attr name="themeColorAccent" format="reference|color"/>
+    <attr name="themeBackgroundColor" format="reference|color"/>
+    <attr name="themeMenuHeaderTextColor" format="reference|color"/>
+    <attr name="themeSettingsCategoryTextColor" format="reference|color"/>
+    <attr name="themeSettingsItemTextColor" format="reference|color"/>
+    <attr name="themeInstancesItemTextColor" format="reference|color"/>
+    <attr name="themeAlertBackgroundColor" format="reference|color"/>
+    <attr name="themeAlertTitleColor" format="reference|color"/>
+    <attr name="themeActionModeBackground" format="reference|color"/>
+    <attr name="themeTextColor" format="reference|color"/>
+    <attr name="themeTextColorInverse" format="reference|color"/>
+    <attr name="themeTextBackgroundColor" format="reference|color"/>
+    <attr name="themeDividerColor" format="reference|color"/>
+    <attr name="themeSelectorTextColor" format="reference|color"/>
+    <attr name="themeSearchViewTextColor" format="reference|color"/>
+    <attr name="themeItemSelectedTextColor" format="reference|color"/>
+    <declare-styleable name="themeItemSelectedTextColor"/>
+    <attr name="themeItemUnselectedTextColor" format="reference|color"/>
+    <declare-styleable name="themeItemUnselectedTextColor"/>
+    <attr name="themeDisabledTextColor" format="reference|color"/>
+    <attr name="themeSelectedBackgroundColor" format="reference|color"/>
+    <attr name="themeSecondaryTextColor" format="reference|color"/>
+    <attr name="themeColorPrimaryOverlay" format="reference|color"/>
+    <attr name="themeHiddenContainerColor" format="reference|color"/>
+    <attr name="themeColorPressedAccent" format="reference|color"/>
+    <attr name="themePlayerStopRecordColor" format="reference|color"/>
+    <attr name="themePlayerRedRecordColor" format="reference|color"/>
+
+
+</resources>

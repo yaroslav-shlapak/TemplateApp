@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themeTextSize" format="reference|dimension"/>
+    <attr name="themeSelectorTextSize" format="reference|dimension"/>
+    <attr name="themeSearchViewTextSize" format="reference|dimension"/>
+</resources>

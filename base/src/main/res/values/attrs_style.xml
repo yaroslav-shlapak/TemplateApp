@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themeListDivider" format="reference"/>
+    <attr name="themeAlertDialogStyle" format="reference"/>
+    <attr name="themeToolbarStyle" format="reference"/>
+    <attr name="themeTextStyle" format="reference"/>
+    <attr name="themeSelectorStyle" format="reference"/>
+    <attr name="themeSelectorTextStyle" format="reference"/>
+    <attr name="themeFastScrollRecyclerStyle" format="reference"/>
+    <attr name="themeRecyclerViewStyle" format="reference"/>
+    <attr name="themeFastScrollViewStyle" format="reference"/>
+    <declare-styleable name="themeFastScrollRecyclerStyle"/>
+    <declare-styleable name="themeFabStyle"/>
+    <attr name="themeFabStyle" format="reference"/>
+    <declare-styleable name="themeSearchTextStyle"/>
+    <attr name="themeSearchViewStyle" format="reference"/>
+    <attr name="themeItemSelectStyle" format="reference"/>
+    <attr name="themeItemSelectTitleStyle" format="reference"/>
+    <attr name="themeItemStyle" format="reference"/>
+    <attr name="themeFolderInElementList" format="reference"/>
+    <attr name="themeElementNameStyle" format="reference"/>
+    <attr name="themeElementValueStyle" format="reference"/>
+    <attr name="themeElementDiffStyle" format="reference"/>
+    <attr name="themeBottomNavStyle" format="reference"/>
+    <attr name="themeSettingsSectionTitleStyle" format="reference"/>
+    <attr name="themeSettingsDividerStyle" format="reference"/>
+    <attr name="themeSettingsItemStyle" format="reference"/>
+    <attr name="themeSettingsSwitchStyle" format="reference"/>
+    <attr name="themeGenericButtonStyle" format="reference"/>
+
+</resources>

@@ -3,6 +3,7 @@ package com.company.app.di.modules
 import android.app.Application
 import android.content.Context
 import com.company.app.di.DiConstants
+import com.company.app.di.ViewModelModule
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -11,7 +12,11 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Named
 
 
-@Module
+@Module(includes = [
+    ViewModelModule::class,
+    NavigationModule::class,
+    ThreadingModule::class
+])
 class AppModule(private val application: Application) {
 
     @Provides

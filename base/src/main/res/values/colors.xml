@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!-- COMMON -->
+    <color name="colorAlertValueGood">#60A177</color>
+    <color name="colorAlertValueBad">#CC6666</color>
+    <color name="colorAlertValueNeutral">#FFCA00</color>
+
+    <color name="colorPageNonSelected">#F2F4F5</color>
+
+    <color name="colorProgressBar">#145E7E</color>
+
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorPriorityHigh">#D64733</color>
+
+    <!-- DEFAULT -->
+    <color name="defaultColorPrimary">#007ED6</color>
+    <color name="defaultColorPrimaryDark">#005FB3</color>
+    <color name="defaultColorAccent">#FE6563</color>
+
+    <color name="defaultTextColor">#212121</color>
+    <color name="defaultTextColorDark">#dddddd</color>
+    <color name="defaultDividerColor">#e5e5e5</color>
+
+    <color name="defaultBackgroundColor">#fff</color>
+    <color name="white">#ffffff</color>
+
+    <color name="defaultMenuHeaderTextColor">#fff</color>
+
+    <color name="defaultSettingsCategoryTextColor">#37809F</color>
+    <color name="defaultSettingsItemTextColor">#4B4B4B</color>
+
+    <color name="defaultInstancesItemTextColor">#7D7D7D</color>
+
+    <color name="defaultColorAlertBackground">#fff</color>
+    <color name="defaultColorAlertTitle">#333333</color>
+
+    <!-- DARK -->
+    <color name="darkColorPrimary">#212121</color>
+    <color name="darkColorPrimaryDark">#000</color>
+    <color name="darkColorAccent">#009ADD</color>
+
+    <color name="darkBackgroundColor">#000</color>
+
+    <color name="darkMenuHeaderTextColor">#fff</color>
+
+    <color name="darkListDividerColor">#333333</color>
+
+    <color name="darkSettingsCategoryTextColor">#999999</color>
+    <color name="darkSettingsItemTextColor">#009ADD</color>
+
+    <color name="darkInstancesItemTextColor">#009ADD</color>
+
+    <color name="darkColorAlertBackground">#000</color>
+    <color name="darkColorAlertTitle">#009ADD</color>
+    <color name="colorAlertEditorEditTextBg">#fafafa</color>
+    <color name="colorAlertEditorEditTextBgDark">#212121</color>
+
+    <color name="managed_alert_editor_assignee_background_even">#eeeeee</color>
+    <color name="spinner_background_pressed_color">#4600b8dd</color>
+
+    <color name="disabledTextColor">#c2c2c2</color>
+    <color name="folderSectionColor">#aa37809F</color>
+    <color name="selectedBackgroundColor">#c2c2c2</color>
+    <color name="secondaryTextColor">#7a7a7a</color>
+    <color name="hiddenSnackBackground">#e9f1f4</color>
+    <color name="pressedAccent">#4cb0da</color>
+    <color name="pressedAccentDark">#004a6b</color>
+
+    <color name="errorMessageStrokeColor">#D2493A</color>
+    <color name="errorMessageTextColor">#D76F6F</color>
+    <color name="colorWhiteOpaque">#80FFFFFF</color>
+    <color name="colorLightBlue">#DFF1FF</color>
+    <color name="colorRedRecord">#DC453A</color>
 </resources>

@@ -41,37 +41,35 @@ class App : Application(), HasSupportFragmentInjector, HasActivityInjector, HasS
 
     override fun onCreate() {
         super.onCreate()
+        if (initLeakCanary()) return
+        initDagger()
+        initTimber()
+    }
+
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(TimberCrashlyticsTree())
+        }
+    }
+
+    private fun initDagger() {
+        DaggerAppComponent
+            .builder()
+            .application(this)
+            .appModule(AppModule(this))
+            .build()
+            .inject(this)
+    }
+
+    private fun initLeakCanary(): Boolean {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
-            return
+            return true
         }
-        FirebaseApp.initializeApp(this)
-
-        DaggerAppComponent
-                .builder()
-                .application(this)
-                .appModule(AppModule(this))
-                .build()
-            .inject(this)
-
-        //init Crashlytics
-        val crashlyticsKit: Crashlytics
-        if (BuildConfig.DEBUG) {
-            //LeakCanary.install(this)
-            Timber.plant(Timber.DebugTree())
-            crashlyticsKit = Crashlytics.Builder()
-                    .core(CrashlyticsCore.Builder().disabled(true).build())
-                    .build()
-        } else {
-            crashlyticsKit = Crashlytics()
-            Timber.plant(TimberCrashlyticsTree())
-        }
-
-        Fabric.with(this, crashlyticsKit)
-
-        StateSaver.setEnabledForAllActivitiesAndSupportFragments(this, true)
-        Stetho.initializeWithDefaults(this)
+        return false
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
@@ -90,6 +88,7 @@ class App : Application(), HasSupportFragmentInjector, HasActivityInjector, HasS
 
         init {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
