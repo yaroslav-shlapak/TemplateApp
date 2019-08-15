@@ -11,7 +11,7 @@ import com.company.app.R
  * Created on 2019/01/24.
  */
 class IFragmentNavigation : FragmentNavigation {
-    override fun openMain(fragment: Fragment, arg: Parcelable?) {
+    override fun openOther(fragment: Fragment, arg: Parcelable?) {
         navigateTo(fragment, R.id.action_mainFragment_to_otherFragment, arg)
     }
 

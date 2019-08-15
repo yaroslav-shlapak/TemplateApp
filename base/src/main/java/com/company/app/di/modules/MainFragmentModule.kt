@@ -8,4 +8,6 @@ import dagger.Module
 @Module(includes = [
 
 ])
-class MainModule
+class MainFragmentModule {
+
+}

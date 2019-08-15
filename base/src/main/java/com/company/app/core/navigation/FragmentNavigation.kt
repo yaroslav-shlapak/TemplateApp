@@ -7,5 +7,5 @@ import androidx.fragment.app.Fragment
  * Created on 2019/01/27.
  */
 interface FragmentNavigation {
-    fun openMain(fragment: Fragment, arg: Parcelable? = null)
+    fun openOther(fragment: Fragment, arg: Parcelable? = null)
 }

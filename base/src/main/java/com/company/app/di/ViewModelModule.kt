@@ -3,13 +3,14 @@ package com.company.app.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.company.app.core.AppViewModelFactory
+import com.company.app.di.modules.MainFragmentModule
 import com.company.app.presentation.main.MainFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module(includes = [
-
+    MainFragmentModule::class
 ])
 abstract class ViewModelModule {
 
