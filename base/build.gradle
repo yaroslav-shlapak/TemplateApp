@@ -44,6 +44,12 @@ android {
 
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.gradle.incremental"] = 'true'
+            }
+        }
     }
 
     compileOptions {
@@ -115,12 +121,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
-
-    // Room Database
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
 
     // Firebase
     implementation "com.google.firebase:firebase-messaging:$firebaseMessagingVesrion"
