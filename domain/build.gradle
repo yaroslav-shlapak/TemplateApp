@@ -58,7 +58,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
     buildTypes {
@@ -107,19 +106,12 @@ dependencies {
     // Room Database
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
-    implementation "androidx.room:room-testing:$roomVersion"
-    implementation "android.arch.paging:rxjava2:$pagingRxVersion"
 
     // Retrofit gson converter
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     // Timber for logging
     implementation "com.jakewharton.timber:timber:$timberVersion"
-
-    // Java Concurrency in Practice annotations
-    implementation "net.jcip:jcip-annotations:$jcipAnnotationsVersion"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -140,7 +132,6 @@ dependencies {
 
     // Test junit
     testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation"de.mannodermaus.junit5:android-instrumentation-test-runner:$junit5RunnerVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
 
